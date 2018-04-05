@@ -79,6 +79,7 @@
     [_screenShotImageViewBottom removeFromSuperview];
   }
 
+  CGRect screenBound = [[UIScreen mainScreen] bounds];
   _command = command;
   NSMutableDictionary *args = [command.arguments objectAtIndex:0];
   NSString *direction = [args objectForKey:@"direction"];
@@ -87,6 +88,8 @@
   NSNumber *fixedPixelsBottomNum = [args objectForKey:@"fixedPixelsBottom"];
   int fixedPixelsTop = [fixedPixelsTopNum intValue];
   int fixedPixelsBottom = [fixedPixelsBottomNum intValue];
+
+  _nonWebViewHeight = screenBound.size.width-self.transitionView.frame.size.width + screenBound.size.height-self.transitionView.frame.size.height;
 
   _originalColor = self.viewController.view.backgroundColor;
   self.viewController.view.backgroundColor = [UIColor blackColor];
